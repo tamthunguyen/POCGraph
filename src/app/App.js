@@ -1,7 +1,8 @@
 import React from 'react';
 import LeaseRate from '../components/leaserate';
 import VacancyGraph from '../components/VacancyGraph'
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, ListGroup } from 'reactstrap';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -31,11 +32,22 @@ export default class App extends React.Component {
   render() {
 
     return (
+      <Router>
       <Container className="main-container">
+        <nav>
+          <ul style={{listStyleType: "none", display: "block"}}>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/linegraph">VacancyGraph</Link></li>
+          </ul>
+        </nav>
+      <Route exact path="/" />
+      <Route path="/linegraph">
           <Row className="main-row">
             <VacancyGraph marketdata={this.state.data} graphwidth={600} graphheight={600} />     
         </Row>
+      </Route>
         </Container>
+        </Router>
     )
   }
 }
